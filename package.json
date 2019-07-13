@@ -1,0 +1,15 @@
+{
+  "name": "4-basedenode",
+  "version": "1.0.0",
+  "description": "base de datos de multiplicacion en la carpeta multiplicar ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "example_user <example-user@example.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.3.3",
+    "yargs": "^13.2.4"
+  }
+}
