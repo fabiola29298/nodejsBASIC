@@ -17,38 +17,63 @@ const cargarDB = () => {
     } catch {
         listadoPorHacer = [];
     }
-
-
 }
-
-
 
 
 // primera funcion
 const crear = (descripcion) => {
-        cargarDB();
-
-        let porHacer = {
-            descripcion,
-            completado: false
-        };
-
-        listadoPorHacer.push(porHacer);
-        guardarDB();
-        return porHacer;
-
-    }
-    //segunda funcion
-const getListado = () => {
     cargarDB();
-    return listadoPorHacer;
+    let porHacer = {
+        descripcion,
+        completado: false
+    };
+    listadoPorHacer.push(porHacer);
+    guardarDB();
+    return porHacer;
+}
 
+//segunda funcion
+const getListado = () => {
+        cargarDB();
+        return listadoPorHacer;
+    }
+    // tercera funcion
+const actualizar = (descripcion, completado = true) => {
+    cargarDB();
+    let index = listadoPorHacer.findIndex(tarea => {
+        return tarea.descripcion === descripcion;
+    });
 
-
+    if (index >= 0) {
+        listadoPorHacer[index].completado = completado;
+        guardarDB();
+        return true;
+    } else {
+        return false;
+    }
 
 }
 
+//cuarta funcion
+const borrar = (descripcion) => {
+    cargarDB();
+
+    let nuevoListado = listadoPorHacer.filter(tarea => {
+        return tarea.descripcion !== descripcion
+    });
+
+    if (listadoPorHacer.length === nuevoListado.length) {
+        return false;
+    } else {
+        listadoPorHacer = nuevoListado;
+        guardarDB();
+        return true;
+    }
+
+}
 module.exports = {
     crear,
-    getListado
+    getListado,
+    actualizar,
+    borrar
 }
